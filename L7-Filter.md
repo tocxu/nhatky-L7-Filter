@@ -1,22 +1,39 @@
-#L7-Filter
-L7-filter is a software package which provides a classifier for Linux's Netifilter subsystem which can categorize Internet Protocol packets based on their application layer data. 
-
-The major goal of this tool is to make possible the identification of peer-to-peer programs, which use unpredictable port numbers. 
-
-There are two version for this software.
-
 #Các kiểu tấn công:
-#DDoS Web Attack
-1.1 HTTP Flood Attack
-HTTP POST DD0S Attack
+#L7 DDoS Attack
+Lạm dụng bộ nhớ ứng dụng server và giới hạn hiệu suất - giả mạo như các giao dịch hợp lệ.
 
+Giả mạo hành vi của con người, tương tác giao diện
 
-#Công cụ
+Chủ yếu tấn công dựa vào 2 method:
+* HTTP GET
+* HTTP POST
 
 #Cơ chế để tấn công
-utilizes the standrad valid GET/POST requests uesed to fetch information, as in typical URL dât retrievals (images, information, etc)during SSL sesons . 
+Chỉ gửi header HTTP thật chậm để duy trì kết nối với mục đích đánh sập website.
+
+Gửi nhiều HTTP POST và HTTP GET , đây là hai request hợp lệ, với cùng mục đích như trên khi cố làm quá tải khả năng xử lý của server.
 #Cách khắc phục
+* Giới hạn số lượng request trên 1 IP
+* block IP hoặc một giải IP khả ngh
+* Giới hạn số lượng request mà website có thể nhận/ giây
+* Giới hạn thời gian time-out
+* Kiểm soát cookie
+* kết thúc hoặc chi nhỏ các traffic
 
-#Triển khai trên nginx cụ thể 
+=>Sử dụng NGINX như một Reverse Proxy 
 
-#Ưu  gnhược điểm
+Sử dụng thêm cách sản phẩm WAF như: 
+* Fail2ban ()
+* NAXSI
+* HAProxy (use it as a layer 7 load balancer))
+Giám sát Nginx/Apache với Observium 
+ 
+* hạn chế băng thông với iptables
+[more about L7 filter](http://l7-filter.sourceforge.net/HOWTO-kernel)
+#triển khai
+Tham khảo: 
+[naxsi] (http://www.slideshare.net/wallarm/how-to-secure-your-web-applications-with-nginx)
+
+[secure with nginx](https://www.nginx.com/blog/mitigating-ddos-attacks-with-nginx-and-nginx-plus/)
+
+[fail2ban](https://blog.bullten.com/mitigating-layer7-http-flood-with-nginxfail2ban/)
