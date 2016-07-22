@@ -1,4 +1,3 @@
-#Các kiểu tấn công:
 #L7 DDoS Attack
 Lạm dụng bộ nhớ ứng dụng server và giới hạn hiệu suất - giả mạo như các giao dịch hợp lệ.
 
@@ -29,11 +28,15 @@ Sử dụng thêm cách sản phẩm WAF như:
 Giám sát Nginx/Apache với Observium 
  
 * hạn chế băng thông với iptables
-[more about L7 filter](http://l7-filter.sourceforge.net/HOWTO-kernel)
-#triển khai
-Tham khảo: 
-[naxsi] (http://www.slideshare.net/wallarm/how-to-secure-your-web-applications-with-nginx)
 
-[secure with nginx](https://www.nginx.com/blog/mitigating-ddos-attacks-with-nginx-and-nginx-plus/)
+[more about L7 filter](http://l7-filter.sourceforge.net/HOWTO-kernel)
+
+#Triển khai
+
+Tham khảo:
+
+[secure with nginx 1] (http://www.slideshare.net/wallarm/how-to-secure-your-web-applications-with-nginx)
+
+[secure with nginx 2](https://www.nginx.com/blog/mitigating-os-attacks-with-nginx-and-nginx-plus/)
 
 [fail2ban](https://blog.bullten.com/mitigating-layer7-http-flood-with-nginxfail2ban/)
