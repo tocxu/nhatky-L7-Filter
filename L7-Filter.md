@@ -25,6 +25,7 @@ Sử dụng thêm cách sản phẩm WAF như:
 * Fail2ban ()
 * NAXSI
 * HAProxy (use it as a layer 7 load balancer))
+* 
 Giám sát Nginx/Apache với Observium 
  
 * hạn chế băng thông với iptables
