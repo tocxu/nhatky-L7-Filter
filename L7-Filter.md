@@ -18,6 +18,9 @@ Gửi nhiều HTTP POST và HTTP GET , đây là hai request hợp lệ, với c
 * Giới hạn thời gian time-out
 * Kiểm soát cookie
 * kết thúc hoặc chi nhỏ các traffic
+* hạn chế băng thông với iptables
+
+[more about L7 filter](http://l7-filter.sourceforge.net/HOWTO-kernel)
 
 =>Sử dụng NGINX như một Reverse Proxy 
 
@@ -25,12 +28,10 @@ Sử dụng thêm cách sản phẩm WAF như:
 * Fail2ban ()
 * NAXSI
 * HAProxy (use it as a layer 7 load balancer))
-* 
+
 Giám sát Nginx/Apache với Observium 
  
-* hạn chế băng thông với iptables
 
-[more about L7 filter](http://l7-filter.sourceforge.net/HOWTO-kernel)
 
 #Triển khai
 
