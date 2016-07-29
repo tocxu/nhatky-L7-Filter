@@ -33,8 +33,11 @@ Sử dụng thêm cách sản phẩm WAF như:
 * 
 * Using the String Match Engine (SME), a L7 Regex engine
 * 
- 
 
+[Sử dụng script để block Spamhaus Lasso Drop Spam IP Address] (https://bash.cyberciti.biz/web-server/nginx-shell-script-to-block-spamhaus-lasso-drop-spam-ip-address/)
+```
+
+```
 
 #Triển khai
 
