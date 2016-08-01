@@ -4,7 +4,7 @@
 # The script will get executed every day via /etc/cron.daily (make sure crond
 # is running).
 # -------------------------------------------------------------------------
-# Copyright (c) 2008 nixCraft project 
+# Copyright (c) 2008 nixCraft project
 # This script is licensed under GNU GPL version 2.0 or above
 # -------------------------------------------------------------------------
 # This script is part of nixCraft shell script collection (NSSC)

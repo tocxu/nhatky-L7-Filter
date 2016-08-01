@@ -1,4 +1,4 @@
-#L7 DDoS Attack
+  #L7 DDoS Attack
 Lạm dụng bộ nhớ ứng dụng server và giới hạn hiệu suất - giả mạo như các giao dịch hợp lệ.
 
 Giả mạo hành vi của con người, tương tác giao diện
@@ -16,7 +16,6 @@ Gửi nhiều HTTP POST và HTTP GET , đây là hai request hợp lệ, với c
 ## Cấu hình
 * Giới hạn mức độ request (Limitting the Rate of requests. Ví dụ, bạn có thể làm cho một IP client cố gắng để đăng nhập mỗi 2 giây ( tương đương 30 yêu cầu-request) mỗi phút.
 ```
-
 limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
 
 server {
@@ -29,13 +28,27 @@ server {
 ```
 
 * block IP hoặc một giải IP khả nghi
-* Giới hạn số lượng request mà website có thể nhận/ giây
+* Giới hạn số lượng request:
+Ví dụ, bạn có thể cho phép mỗi địa chỉ IP mở không nhiều hơn 10 kết nối với các khu vực / cửa hàng của trang web của bạn:
+```
+limit_conn_zone $binary_remote_addr zone=addr:10m;
+
+
+server {
+    ...
+    location /store/ {
+        limit_conn addr 10;
+        ...
+    }
+}
+```
+* choonsg laij
+
+
 * Giới hạn thời gian time-out
 * Kiểm soát cookie
 * kết thúc hoặc chi nhỏ các traffic
 * hạn chế băng thông với iptables
-
-
 
 =>Sử dụng NGINX như một Reverse Proxy
 ## Configure
@@ -49,7 +62,6 @@ Sử dụng thêm cách sản phẩm WAF như:
 * Using the String Match Engine (SME), a L7 Regex engine
 *
 ##Use Script or embed code
-
 
 [Sử dụng script để block Spamhaus Lasso Drop Spam IP Address] (https://bash.cyberciti.biz/web-server/nginx-shell-script-to-block-spamhaus-lasso-drop-spam-ip-address/)
 * Use test_cookie module
