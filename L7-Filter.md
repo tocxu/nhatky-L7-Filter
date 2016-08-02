@@ -7,6 +7,10 @@ Chủ yếu tấn công dựa vào 2 method:
 * HTTP GET
 * HTTP POST
 
+# Phát hiện
+[detect L7 DDoS](http://bit.ly/2aOCe68)
+
+
 #Cơ chế để tấn công
 Chỉ gửi header HTTP thật chậm để duy trì kết nối với mục đích đánh sập website.
 
