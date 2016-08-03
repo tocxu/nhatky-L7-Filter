@@ -9,7 +9,9 @@ Chủ yếu tấn công dựa vào 2 method:
 
 # Phát hiện
 [detect L7 DDoS](http://bit.ly/2aOCe68)
-Có thể dựa vào string/pattern mà chúng ta định nghĩa trong file cấu hình để xác định cũng như nhận diện một cuộc tấn công L7 DDoS 
+
+Có thể dựa vào string/pattern mà chúng ta định nghĩa trong file cấu hình để xác định cũng như nhận diện một cuộc tấn công L7 DDoS
+
 **`Traffic Monitoring`**
 
 * Dựa vào các thông số
@@ -17,7 +19,7 @@ Có thể dựa vào string/pattern mà chúng ta định nghĩa trong file cấ
  IP/session/user; URLs, headers, parameters
 
 * Dựa vào các kết nối đến server
-* 
+*
 
 #Cơ chế để tấn công
 Chỉ gửi header HTTP thật chậm để duy trì kết nối với mục đích đánh sập website.
@@ -55,7 +57,7 @@ server {
 }
 ```
 * Đóng các kết nối chậm
-Ví dụ này cấu hình nginx để chờ đợi không quá 5 giây giữa các lần ghi từ client cho một trong hai phần header hoặc body: 
+Ví dụ này cấu hình nginx để chờ đợi không quá 5 giây giữa các lần ghi từ client cho một trong hai phần header hoặc body:
 
 ```
 server {
@@ -64,7 +66,7 @@ server {
     ...
 }
 ```
-* Dánh sách đen địa chỉ IP 
+* Dánh sách đen địa chỉ IP
 Đây có thể là danh sách các IP đã thực hiện tấn công DDoS được ghi lại
 
 ```
@@ -100,7 +102,7 @@ location / {
     Requests in which the Referer header is set to a value that can be associated with an attack
     Requests in which other headers have values that can be associated with an attack
 ```
-Ví dụ, bạn nghi ngờ các cuộc tấn công nhắm vào URL /foo.php. Bạn có thể cấu hình chặn tất cả các yêu cầu đên địa chỉ đó: 
+Ví dụ, bạn nghi ngờ các cuộc tấn công nhắm vào URL /foo.php. Bạn có thể cấu hình chặn tất cả các yêu cầu đên địa chỉ đó:
 ```
 location /foo.php {
     deny all;
