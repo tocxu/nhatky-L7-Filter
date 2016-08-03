@@ -144,12 +144,12 @@ upstream website {
 * hạn chế băng thông với iptables
 
 =>Sử dụng NGINX như một Reverse Proxy
-## Configure
-Sử dụng thêm cách sản phẩm WAF như:
-* Fail2ban ()
-* NAXSI
-* HAProxy (use it as a layer 7 load balancer))
-#Detect
+
+* Sử dụng thêm cách sản phẩm WAF như:
+* * Fail2ban
+* * NAXSI
+* * HAProxy (use it as a layer 7 load balancer))
+## Detect
 * Giám sát Nginx/Apache với Observium
 *
 * Using the String Match Engine (SME), a L7 Regex engine
