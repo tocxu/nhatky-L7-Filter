@@ -9,7 +9,15 @@ Chủ yếu tấn công dựa vào 2 method:
 
 # Phát hiện
 [detect L7 DDoS](http://bit.ly/2aOCe68)
+Có thể dựa vào string/pattern mà chúng ta định nghĩa trong file cấu hình để xác định cũng như nhận diện một cuộc tấn công L7 DDoS 
+**`Traffic Monitoring`**
 
+* Dựa vào các thông số
+
+ IP/session/user; URLs, headers, parameters
+
+* Dựa vào các kết nối đến server
+* 
 
 #Cơ chế để tấn công
 Chỉ gửi header HTTP thật chậm để duy trì kết nối với mục đích đánh sập website.
@@ -46,11 +54,79 @@ server {
     }
 }
 ```
-* choonsg laij
+* Đóng các kết nối chậm
+Ví dụ này cấu hình nginx để chờ đợi không quá 5 giây giữa các lần ghi từ client cho một trong hai phần header hoặc body: 
+
+```
+server {
+    client_body_timeout 5s;
+    client_header_timeout 5s;
+    ...
+}
+```
+* Dánh sách đen địa chỉ IP 
+Đây có thể là danh sách các IP đã thực hiện tấn công DDoS được ghi lại
+
+```
+location / {
+    deny 123.123.123.0/28;
+    ...
+}
+```
+cũng có thể là dải ip mà bạn nghi là kẻ tấn công
+
+```
+location / {
+    deny 123.123.123.3;
+    deny 123.123.123.5;
+    deny 123.123.123.7;
+    ...
+}
+```
+Ngược với black IP. Bạn có thể chỉ định IP đặc biệt mới được truy cập vào ứng dụng web:
+
+```
+location / {
+    allow 192.168.1.0/24;
+    deny all;
+    ...
+}
+```
+
+* Block king request
+```
+    Requests to a specific URL that seems to be targeted
+    Requests in which the User-Agent header is set to a value that does not correspond to normal client traffic
+    Requests in which the Referer header is set to a value that can be associated with an attack
+    Requests in which other headers have values that can be associated with an attack
+```
+Ví dụ, bạn nghi ngờ các cuộc tấn công nhắm vào URL /foo.php. Bạn có thể cấu hình chặn tất cả các yêu cầu đên địa chỉ đó: 
+```
+location /foo.php {
+    deny all;
+}
+```
+Chặn dựa theo giá trị của User-Agent header, ví dụ như chứa foo hoặc bar:
+```
+location / {
+    if ($http_user_agent ~* foo|bar) {
+        return 403;
+    }
+    ...
+}
+```
+
+* Limiting the Connections to Backend Servers
+
+```
+upstream website {
+    server 192.168.100.1:80 max_conns=200;
+    server 192.168.100.2:80 max_conns=200;
+    queue 10 timeout=30s;
+}
+```
 
 
-* Giới hạn thời gian time-out
-* Kiểm soát cookie
 * kết thúc hoặc chi nhỏ các traffic
 * hạn chế băng thông với iptables
 
