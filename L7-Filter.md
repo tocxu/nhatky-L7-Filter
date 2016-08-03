@@ -6,22 +6,37 @@ Giả mạo hành vi của con người, tương tác giao diện
 Chủ yếu tấn công dựa vào 2 method:
 * HTTP GET
 * HTTP POST
+* Low-Orbit Ion Cannon
+* Slowloris
+* Slow Read
 
 # Phát hiện
 [detect L7 DDoS](http://bit.ly/2aOCe68)
 
 Có thể dựa vào string/pattern mà chúng ta định nghĩa trong file cấu hình để xác định cũng như nhận diện một cuộc tấn công L7 DDoS
 
-**`Traffic Monitoring`**
+##Traffic Monitoring
 
 * Dựa vào các thông số
 
  IP/session/user; URLs, headers, parameters
 
 * Dựa vào các kết nối đến server
-*
+```
+upstream website {
+    server 192.168.100.1:80 max_conns=200;
+    server 192.168.100.2:80 max_conns=200;
+    queue 10 timeout=30s;
+}
+```
+
+* Handling High Loads
+
 
 #Cơ chế để tấn công
+* HTTP GET
+& HTTP POST
+
 Chỉ gửi header HTTP thật chậm để duy trì kết nối với mục đích đánh sập website.
 
 Gửi nhiều HTTP POST và HTTP GET , đây là hai request hợp lệ, với cùng mục đích như trên khi cố làm quá tải khả năng xử lý của server.
@@ -40,8 +55,6 @@ server {
     }
 }
 ```
-
-* block IP hoặc một giải IP khả nghi
 * Giới hạn số lượng request:
 Ví dụ, bạn có thể cho phép mỗi địa chỉ IP mở không nhiều hơn 10 kết nối với các khu vực / cửa hàng của trang web của bạn:
 ```
@@ -128,8 +141,6 @@ upstream website {
 }
 ```
 
-
-* kết thúc hoặc chi nhỏ các traffic
 * hạn chế băng thông với iptables
 
 =>Sử dụng NGINX như một Reverse Proxy
