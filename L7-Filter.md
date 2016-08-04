@@ -154,6 +154,7 @@ upstream website {
 }
 ```
 **Block User Agent với Nginx**
+
 Mở file cấu hình mà thêm đoạn code sau vào trong section server:
 ```
 server {
