@@ -46,8 +46,6 @@ upstream website {
 }
 ```
 
-* Handling High Loads
-
 #Cách khắc phục
 ## Cấu hình
 Sử dụng Nginx làm reverse proxy và thêm các cấu hình bổ sung như gợi ý dưới đây:
@@ -267,6 +265,7 @@ thành:
 ##Use Script or embed code
 =>Sử dụng NGINX như một Reverse Proxy
 * [lua-nginx-module](http://bit.ly/1PautaZ)
+* [ngx_mruby](http://bit.ly/2aC9dc4)
 
 #Tham khảo:
 
