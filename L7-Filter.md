@@ -49,6 +49,7 @@ upstream website {
 #Cách khắc phục
 ## Cấu hình
 Sử dụng Nginx làm reverse proxy và thêm các cấu hình bổ sung như gợi ý dưới đây:
+
 **Giới hạn mức độ request (Limitting the Rate of requests)**
 
 Ví dụ, bạn có thể làm cho một IP client cố gắng để đăng nhập mỗi 2 giây ( tương đương 30 yêu cầu-request) mỗi phút.
@@ -64,6 +65,7 @@ server {
 }
 ```
 **Giới hạn số lượng request:**
+
 Ví dụ, bạn có thể cho phép mỗi địa chỉ IP mở không nhiều hơn 10 kết nối với các khu vực / cửa hàng của trang web của bạn:
 ```
 limit_conn_zone $binary_remote_addr zone=addr:10m;
@@ -78,6 +80,7 @@ server {
 }
 ```
 **Đóng các kết nối chậm**
+
 Ví dụ này cấu hình nginx để chờ đợi không quá 5 giây giữa các lần ghi từ client cho một trong hai phần header hoặc body:
 
 ```
@@ -88,6 +91,7 @@ server {
 }
 ```
 **Dánh sách đen địa chỉ IP**
+
 Đây có thể là danh sách các IP đã thực hiện tấn công DDoS được ghi lại
 
 ```
