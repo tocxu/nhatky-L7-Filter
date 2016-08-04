@@ -243,6 +243,7 @@ thành:
 > RewriteRule ^.*$ "http\:\/\/www.yoursite\.com\/nobots.html" [R=301,L]
 
 ###Một số rule khác cho nginx vs apache
+
 **Block spam comment**
 
 ```
