@@ -1,15 +1,30 @@
-  #L7 DDoS Attack
+#L7 DDoS Attack
+
 Lạm dụng bộ nhớ ứng dụng server và giới hạn hiệu suất - giả mạo như các giao dịch hợp lệ.
 
 Giả mạo hành vi của con người, tương tác giao diện
 
 Chủ yếu tấn công dựa vào 2 method:
-* HTTP GET
-* HTTP POST
-* Low-Orbit Ion Cannon
-* Slowloris
-* Slow Read
+* HTTP GET (HTTP slow read)
+* HTTP POST (HTTP Slow body)
+Ngoài ra còn có  kiểu tấn công với HTTP Request như:
+* HTTP Slow header (slowloris)
 
+**HTTP POST**
+
+Tương tự HTTP slow header nhưng ở đây sẽ tiến hành làm chậm quá trình gửi nội dung thông điệp.
+
+**HTTP GET**
+
+Gửi request hoàn chỉnh nhưng lại đọc dữ liệu nhỏ giọt từ server.
+
+Cách phát hiện: attack tìm kiếm các nguồn tài nguyên tạo ra bởi server mà có kích thước lớn hơn kích thước bộ đệm của server (thường từ 65 - 128Kb). Sau đó xác định kích thước bộ đệm đọc < kích thước bộ đệm.
+
+Khi server gửi response, attack nhận gói tin đầu tiên, và thông báo lại kích thước của sổ TCP nhỏ nhất có thể (Server dựa vào đây để gửi gói tin tiếp theo)
+
+**HTTP slow header**
+
+Cố tình không gửi CRLF để hoàn tất request header dẫn tới server phải giữ kết nối. Trạng thái chờ này sẽ kéo dài cho đến khi nhận được đủ request hoặc hết timeout (theo mặc định là 300s). Quá 5 phút này, socket ấy sẽ bị hủy.
 # Phát hiện
 [detect L7 DDoS](http://bit.ly/2aOCe68)
 
