@@ -50,6 +50,7 @@ upstream website {
 
 #Cách khắc phục
 ## Cấu hình
+Sử dụng Nginx làm reverse proxy và thêm các cấu hình bổ sung như gợi ý dưới đây:
 **Giới hạn mức độ request (Limitting the Rate of requests)**
 
 Ví dụ, bạn có thể làm cho một IP client cố gắng để đăng nhập mỗi 2 giây ( tương đương 30 yêu cầu-request) mỗi phút.
@@ -117,13 +118,15 @@ location / {
 }
 ```
 
-**Block king request**
+**Blocking request**
+Sử dụng nginx để lọc, block một số request theo tiêu chí khác nhau:
 ```
-    Requests to a specific URL that seems to be targeted
-    Requests in which the User-Agent header is set to a value that does not correspond to normal client traffic
-    Requests in which the Referer header is set to a value that can be associated with an attack
-    Requests in which other headers have values that can be associated with an attack
+    Các request tới một URL cụ thể
+    Các request có User-Agent không bình thường
+    Các request trong đó Referer Header có giá trị có thể kết hợp với một cuộc tấn công.
+    Các request trong đó header có giá trị có thể liên kết với một cuộc tấn công
 ```
+
 Ví dụ, bạn nghi ngờ các cuộc tấn công nhắm vào URL /foo.php. Bạn có thể cấu hình chặn tất cả các yêu cầu đên địa chỉ đó:
 ```
 location /foo.php {
