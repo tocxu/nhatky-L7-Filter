@@ -153,8 +153,32 @@ upstream website {
     queue 10 timeout=30s;
 }
 ```
+**Block User Agent với Nginx**
+Mở file cấu hình mà thêm đoạn code sau vào trong section server:
+```
+server {
+    listen       80 default_server;
+
+    root         /home/hocvps.com/public_html;
+    index index.php index.html index.htm;
+    server_name hocvps.com;
+
+    <br># case sensitive matching
+    if ($http_user_agent ~ (Antivirx|Arian)) {
+        return 403;
+    }
+
+    # case insensitive matching
+    if ($http_user_agent ~* (netcrawl|npbot|malicious)) {
+        return 403;
+    }
+    </br>
+```
+
 
 **hạn chế băng thông với iptables**
+
+
 
 =>Sử dụng NGINX như một Reverse Proxy
 
@@ -168,11 +192,6 @@ upstream website {
 * Using the String Match Engine (SME), a L7 Regex engine
 *
 ##Use Script or embed code
-
-[Sử dụng script để block Spamhaus Lasso Drop Spam IP Address] (https://bash.cyberciti.biz/web-server/nginx-shell-script-to-block-spamhaus-lasso-drop-spam-ip-address/)
-* Use test_cookie module
-
-whether the client can
 
 
 #Triển khai
