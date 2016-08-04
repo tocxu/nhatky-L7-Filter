@@ -222,9 +222,8 @@ if ($http_user_agent ~* (foo|bar) ) {
 }
 ```
 
-**Block User-agent on Apache **
-###Một số rule khác cho nginx vs apache
-**Block spam comment**
+**Block User-agent on Apache**
+
 ```
   RewriteEngine On
   RewriteCond %{HTTP_USER_AGENT} Googlebot [OR]
@@ -243,6 +242,9 @@ bằng cách thay dòng sau: *RewriteRule . - [F,L]*
 thành:
 > RewriteRule ^.*$ "http\:\/\/www.yoursite\.com\/nobots.html" [R=301,L]
 
+###Một số rule khác cho nginx vs apache
+**Block spam comment**
+
 ```
 #Block Spam comment
     location ~* /wp-comments-post\.php$ {
@@ -251,10 +253,6 @@ thành:
         }
     }
 ```
-
-**hạn chế băng thông với iptables**
-
-...
 
 * Sử dụng thêm cách sản phẩm WAF như:
 * [Fail2ban](https://blog.bullten.com/mitigating-layer7-http-flood-with-nginxfail2ban/)
@@ -267,11 +265,9 @@ thành:
 *
 ##Use Script or embed code
 =>Sử dụng NGINX như một Reverse Proxy
-Ta có thể sủ dụng các script với
+* [lua-nginx-module](http://bit.ly/1PautaZ)
 
-#Triển khai
-
-Tham khảo:
+#Tham khảo:
 
 [secure with nginx 1] (http://www.slideshare.net/wallarm/how-to-secure-your-web-applications-with-nginx)
 
