@@ -10,6 +10,7 @@ Chủ yếu tấn công dựa vào 2 method:
 Ngoài ra còn có  kiểu tấn công với HTTP Request như:
 * HTTP Slow header (slowloris)
 
+#Cơ chế để tấn công
 **HTTP POST**
 
 Tương tự HTTP slow header nhưng ở đây sẽ tiến hành làm chậm quá trình gửi nội dung thông điệp.
@@ -47,18 +48,11 @@ upstream website {
 
 * Handling High Loads
 
-
-#Cơ chế để tấn công
-* HTTP GET
-& HTTP POST
-
-Chỉ gửi header HTTP thật chậm để duy trì kết nối với mục đích đánh sập website.
-
-Gửi nhiều HTTP POST và HTTP GET , đây là hai request hợp lệ, với cùng mục đích như trên khi cố làm quá tải khả năng xử lý của server.
-
 #Cách khắc phục
 ## Cấu hình
-* Giới hạn mức độ request (Limitting the Rate of requests. Ví dụ, bạn có thể làm cho một IP client cố gắng để đăng nhập mỗi 2 giây ( tương đương 30 yêu cầu-request) mỗi phút.
+**Giới hạn mức độ request (Limitting the Rate of requests)**
+
+Ví dụ, bạn có thể làm cho một IP client cố gắng để đăng nhập mỗi 2 giây ( tương đương 30 yêu cầu-request) mỗi phút.
 ```
 limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
 
@@ -70,7 +64,7 @@ server {
     }
 }
 ```
-* Giới hạn số lượng request:
+**Giới hạn số lượng request:**
 Ví dụ, bạn có thể cho phép mỗi địa chỉ IP mở không nhiều hơn 10 kết nối với các khu vực / cửa hàng của trang web của bạn:
 ```
 limit_conn_zone $binary_remote_addr zone=addr:10m;
@@ -84,7 +78,7 @@ server {
     }
 }
 ```
-* Đóng các kết nối chậm
+**Đóng các kết nối chậm**
 Ví dụ này cấu hình nginx để chờ đợi không quá 5 giây giữa các lần ghi từ client cho một trong hai phần header hoặc body:
 
 ```
@@ -94,7 +88,7 @@ server {
     ...
 }
 ```
-* Dánh sách đen địa chỉ IP
+**Dánh sách đen địa chỉ IP**
 Đây có thể là danh sách các IP đã thực hiện tấn công DDoS được ghi lại
 
 ```
@@ -123,7 +117,7 @@ location / {
 }
 ```
 
-* Block king request
+**Block king request**
 ```
     Requests to a specific URL that seems to be targeted
     Requests in which the User-Agent header is set to a value that does not correspond to normal client traffic
@@ -146,7 +140,7 @@ location / {
 }
 ```
 
-* Limiting the Connections to Backend Servers
+**Limiting the Connections to Backend Servers**
 
 ```
 upstream website {
@@ -156,7 +150,7 @@ upstream website {
 }
 ```
 
-* hạn chế băng thông với iptables
+**hạn chế băng thông với iptables**
 
 =>Sử dụng NGINX như một Reverse Proxy
 
