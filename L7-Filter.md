@@ -119,6 +119,7 @@ location / {
 ```
 
 **Blocking request**
+
 Sử dụng nginx để lọc, block một số request theo tiêu chí khác nhau:
 ```
     Các request tới một URL cụ thể
@@ -158,9 +159,9 @@ upstream website {
 =>Sử dụng NGINX như một Reverse Proxy
 
 * Sử dụng thêm cách sản phẩm WAF như:
-* * Fail2ban
-* * NAXSI
-* * HAProxy (use it as a layer 7 load balancer))
+* [Fail2ban](https://blog.bullten.com/mitigating-layer7-http-flood-with-nginxfail2ban/)
+* NAXSI
+* HAProxy (use it as a layer 7 load balancer))
 ## Detect
 * Giám sát Nginx/Apache với Observium
 *
@@ -181,5 +182,3 @@ Tham khảo:
 [secure with nginx 1] (http://www.slideshare.net/wallarm/how-to-secure-your-web-applications-with-nginx)
 
 [secure with nginx 2](https://www.nginx.com/blog/mitigating-os-attacks-with-nginx-and-nginx-plus/)
-
-[fail2ban](https://blog.bullten.com/mitigating-layer7-http-flood-with-nginxfail2ban/)
