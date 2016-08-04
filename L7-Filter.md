@@ -210,7 +210,7 @@ if ($http_user_agent ~ (agent1|agent2|Foo|Wget|Catall Spider|AcoiRobot) ) {
 }
 ```
 
-chú ý vào **~*** **~**
+chú ý vào **~*** và **~**
 
 ~* dành cho trường hợp nhạy cảm và ngược lại với ~:
 ```
