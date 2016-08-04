@@ -154,6 +154,7 @@ upstream website {
 }
 ```
 **Block User Agent với Nginx**
+
 Mở file cấu hình mà thêm đoạn code sau vào trong section server:
 ```
 server {
@@ -163,7 +164,7 @@ server {
     index index.php index.html index.htm;
     server_name hocvps.com;
 
-    <br># case sensitive matching
+    # case sensitive matching
     if ($http_user_agent ~ (Antivirx|Arian)) {
         return 403;
     }
@@ -172,15 +173,88 @@ server {
     if ($http_user_agent ~* (netcrawl|npbot|malicious)) {
         return 403;
     }
-    </br>
+
+```
+(sau khi chay lệnh
+
+>  service nginx restart
+
+có thể kiểm tra kết quả với lệnh:
+
+> wget --user-agent "malicious bot" http://domain.com
+
+)
+
+[cách khác](http://bit.ly/2awFEO6)
+
+Thay đổi file: */usr/local/nginx/conf/nginx.conf file*
+> vim /usr/local/nginx/conf/nginx.conf
+
+```
+## Block http user agent - wget ##
+if ($http_user_agent ~* (Wget) ) {
+   return 403;
+}
+
+## Block Software download user agents ##
+     if ($http_user_agent ~* LWP::Simple|BBBike|wget) {
+            return 403;
+     }
+```
+để block nhiều aser-agent:
+```
+if ($http_user_agent ~ (agent1|agent2|Foo|Wget|Catall Spider|AcoiRobot) ) {
+    return 403;
+}
 ```
 
+chú ý vào **~*** **~**
+
+~* dành cho trường hợp nhạy cảm và ngược lại với ~:
+```
+### case sensitive http user agent blocking  ###
+if ($http_user_agent ~ (Catall Spider|AcoiRobot) ) {
+    return 403;
+}
+### case insensitive http user agent blocking  ###
+if ($http_user_agent ~* (foo|bar) ) {
+    return 403;
+}
+```
+
+**Block User-agent on Apache **
+###Một số rule khác cho nginx vs apache
+**Block spam comment**
+```
+  RewriteEngine On
+  RewriteCond %{HTTP_USER_AGENT} Googlebot [OR]
+  RewriteCond %{HTTP_USER_AGENT} AdsBot-Google [OR]
+  RewriteCond %{HTTP_USER_AGENT} msnbot [OR]
+  RewriteCond %{HTTP_USER_AGENT} AltaVista [OR]
+  RewriteCond %{HTTP_USER_AGENT} Slurp
+  RewriteRule . - [F,L]
+```
+lỗi sẽ trả về mã 403
+
+hoặc có thể [điều hướng lỗi về một website chỉ định](http://bit.ly/2aC5b3v)
+
+bằng cách thay dòng sau: *RewriteRule . - [F,L]*
+
+thành:
+> RewriteRule ^.*$ "http\:\/\/www.yoursite\.com\/nobots.html" [R=301,L]
+
+```
+#Block Spam comment
+    location ~* /wp-comments-post\.php$ {
+        if ($http_user_agent ~* "x11; linux i686; rv:17" ) {
+            return 403;
+        }
+    }
+```
 
 **hạn chế băng thông với iptables**
 
-
-
-=>Sử dụng NGINX như một Reverse Proxy
+...
 
 * Sử dụng thêm cách sản phẩm WAF như:
 * [Fail2ban](https://blog.bullten.com/mitigating-layer7-http-flood-with-nginxfail2ban/)
@@ -192,7 +266,8 @@ server {
 * Using the String Match Engine (SME), a L7 Regex engine
 *
 ##Use Script or embed code
-
+=>Sử dụng NGINX như một Reverse Proxy
+Ta có thể sủ dụng các script với
 
 #Triển khai
 
